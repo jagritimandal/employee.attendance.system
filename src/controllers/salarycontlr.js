@@ -4,8 +4,6 @@ const salaryledger = require('../Models/salaryledgerj.js');
 const Deduction = require('../Models/deductionsj');
 const ipaddress = require('../Models/ipaddressj');
 const Salary = require('../Models/salaryj.js');
-const publicIp = require("public-ip"); // install: npm i public-ip
-
 /*---------------------register------------------------------*/
 exports.register = async (req, res) => {
   try {
@@ -221,56 +219,28 @@ exports.checkinj = async (req, res) => {
   }
 };
 //------------------get the ip address of the user------------------//
-// exports.getipj = async (req, res) => {
-//   try {
-//     let ip =
-//     req.headers["x-forwarded-for"]?.split(",")[0] ||
-//     req.socket?.remoteAddress ||
-//     "Unknown";
-  
-//   // Convert IPv6 localhost (::1) to IPv4 (127.0.0.1)
-//   if (ip === "::1") ip = "127.0.0.1";
-
-//   // Clean "::ffff:" prefix (IPv4 mapped IPv6)
-//   ip = ip.replace(/^::ffff:/, "");
-
-//   //console.log("Client IP:", ip);
-//   console.log(req.ip);
-  
-// res.json({ ip });
-//   } catch (error) {
-//     res.status(500).json({ error: error.message });
-//   }
-// }
-
 exports.getipj = async (req, res) => {
   try {
     let ip =
-      req.headers["x-forwarded-for"]?.split(",")[0]?.trim() ||
-      req.socket?.remoteAddress ||
-      "Unknown";
+    req.headers["x-forwarded-for"]?.split(",")[0] ||
+    req.socket?.remoteAddress ||
+    "Unknown";
+  
+  // Convert IPv6 localhost (::1) to IPv4 (127.0.0.1)
+  if (ip === "::1") ip = "127.0.0.1";
 
-    // Convert IPv6 localhost (::1) to IPv4
-    if (ip === "::1") ip = "127.0.0.1";
+  // Clean "::ffff:" prefix (IPv4 mapped IPv6)
+  ip = ip.replace(/^::ffff:/, "");
 
-    // Remove IPv4-mapped IPv6 prefix (::ffff:)
-    ip = ip.replace(/^::ffff:/, "");
-
-    // If still localhost, try fetching the public IP
-    if (ip === "127.0.0.1" || ip === "Unknown") {
-      try {
-        ip = await publicIp.v4(); // fetches public IPv4
-      } catch {
-        // fallback: leave as localhost
-      }
-    }
-
-    console.log("Client IP:", ip);
-    res.json({ ip });
+  //console.log("Client IP:", ip);
+  console.log(req.ip);
+  
+res.json({ ip });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
-};
+}
+
 
 exports.checkoutj = async (req, res) => {
   try {
