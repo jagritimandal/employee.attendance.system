@@ -11,11 +11,10 @@ const app = express();
 
 //  Enable CORS correctly (must come before routes)
 app.use(cors({
-  origin: 'http://localhost:5173', // Your frontend's address
-  methods: ['GET', 'POST'],
-  credentials: true,
-}));
-//middleware
+  origin: "*", // or ["http://localhost:5173", "https://your-netlify-site.netlify.app"]
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+}));//middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
