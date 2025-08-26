@@ -10,12 +10,7 @@ dotenv.config();
 const app = express();
 
 //  Enable CORS correctly (must come before routes)
-app.use(cors({
-  origin: ['http://localhost:5173', 'https://courageous-strudel-ca2835.netlify.app'], // allowed frontends
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true
-}));
+app.use(cors());
 
 
 
@@ -77,7 +72,7 @@ app.get("/api/v2/getdeductionbyemailj", salarycontlr.getdeductionbyemailj);
 app.post("/api/v2/updatedeductionj",salarycontlr.updatedeductionj);
 app.get("/api/v2/deletedeductionj",salarycontlr.deletedeductionj);
 
-app.set("trust proxy", true);
+
 app.get("/api/v2/getipj",salarycontlr.getipj);
 
 app.get("/", (req, res) => {
