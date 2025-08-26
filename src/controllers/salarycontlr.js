@@ -91,7 +91,7 @@ exports.getallipsj = async (req, res) => {
 exports.getipbyemailj = async (req, res) => {
   try {
     const { email } = req.params;
-    const ip = await ipaddress.findOne(email);
+    const ip = await ipaddress.findOne({email});
     if (!ip) {
       return res.status(404).json({ message: 'IP address not found' });
     }
@@ -501,7 +501,7 @@ exports.getdeductionbyemailj = async (req, res) => {
 exports.updatedeductionj = async (req, res) => {
   try {
     const { email } = req.params;
-    const deduction = await Deduction.findOneAndUpdate(email, req.body, { new: true });
+    const deduction = await Deduction.findOneAndUpdate({email}, req.body, { new: true });
     if (!deduction) {
       return res.status(404).json({ message: "Deduction not found" });
     }
@@ -514,7 +514,7 @@ exports.updatedeductionj = async (req, res) => {
 exports.deletedeductionj = async (req, res) => {
   try {
     const { email } = req.params|| req.body.email;
-    const deduction = await Deduction.findOneAndDelete(email);
+    const deduction = await Deduction.findOneAndDelete({email});
     if (!deduction) {
       return res.status(404).json({ message: "Deduction not found" });
     }
