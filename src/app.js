@@ -10,10 +10,8 @@ dotenv.config();
 const app = express();
 
 //  Enable CORS correctly (must come before routes)
-app.use(cors({
-  origin: 'https://courageous-strudel-ca2835.netlify.app',
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-}));
+app.use(cors());
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
