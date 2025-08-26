@@ -77,6 +77,9 @@ app.get("/api/v2/deletedeductionj",salarycontlr.deletedeductionj);
 app.set("trust proxy", true);
 app.get("/api/v2/getipj",salarycontlr.getipj);
 
+app.get("/", (req, res) => {
+  res.send("Employee Attendance API is running 🚀");
+});
 
 
 //Start server
