@@ -10,7 +10,13 @@ dotenv.config();
 const app = express();
 
 //  Enable CORS correctly (must come before routes)
-app.use(cors());
+app.use(cors({
+  origin: ['http://localhost:5173', 'https://courageous-strudel-ca2835.netlify.app'], // allowed frontends
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
+}));
+
 
 
 app.use(express.json());
