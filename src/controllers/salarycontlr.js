@@ -22,7 +22,6 @@ exports.register = async (req, res) => {
     });
 
   } catch (e) {
-    res.status(500).json({ error: e.message });
   }
   
 };
@@ -61,7 +60,6 @@ exports.loginj = async (req, res) => {
   });
   } 
   catch (e) {
-  res.status(500).json({ error: e.message });
   }
 };
 /*--------------ipaddress----------------*/
@@ -76,7 +74,6 @@ exports.addipj = async (req, res) => {
     await newIp.save();
     res.status(201).json({ message: 'IP address created', ip: newIp });
   } catch (error) {
-    res.status(500).json({ error: error.message });
   }
 },
 exports.getallipsj = async (req, res) => {
@@ -84,7 +81,6 @@ exports.getallipsj = async (req, res) => {
     const ips = await ipaddress.find();
     res.status(200).json({ ips });
   } catch (error) {
-    res.status(500).json({ error: error.message });
   }
 },
 
@@ -97,7 +93,6 @@ exports.getipbyemailj = async (req, res) => {
     }
     res.status(200).json({ ip });
   } catch (error) {
-    res.status(500).json({ error: error.message });
   }
 };
 
@@ -113,7 +108,6 @@ exports.updateipj = async (req, res) => {
       }
       res.status(200).json({ message: 'IP address updated', ip: updatedIp });
   } catch (error) {
-      res.status(500).json({ error: error.message });
   }
 };
 
@@ -131,7 +125,6 @@ exports.deleteipj = async (req, res) => {
 
       res.status(200).json({ message: 'IP address deleted', ip: deletedIp });
   } catch (error) {
-      res.status(500).json({ error: error.message });
   }
 };
 
@@ -215,7 +208,6 @@ exports.checkinj = async (req, res) => {
     });
 
   } catch (error) {
-    res.status(500).json({ success: false, message: 'Server Error', error: error.message });
   }
 };
 //------------------get the ip address of the user------------------//
@@ -237,7 +229,6 @@ exports.getipj = async (req, res) => {
   
 res.json({ ip });
   } catch (error) {
-    res.status(500).json({ error: error.message });
   }
 }
 
@@ -287,7 +278,6 @@ exports.checkoutj = async (req, res) => {
       attendance
     });
   } catch (error) {
-    res.status(500).json({ success: false, message: 'Server Error', error: error.message });
   }
 };
   exports.getallattendancesj = async (req, res) => {
@@ -295,7 +285,6 @@ exports.checkoutj = async (req, res) => {
       const reports = await Attendance.find();
       res.status(200).json({ reports });
     } catch (error) {
-      res.status(500).json({ error: error.message });
     }
   };
 exports.getattendancestatusj= async (req, res) => {// status on_checkin always*
@@ -339,7 +328,6 @@ exports.getattendancestatusj= async (req, res) => {// status on_checkin always*
     }
   } catch (error) {
 
-    res.status(500).json({error: error.message});
   }
 };
 
@@ -360,7 +348,6 @@ exports.getattendancebyemailj = async (req, res) => {
     //console.log("Query result:", attendance);
     res.status(200).json({ attendance });
   } catch (error) {
-    res.status(500).json({ error: error.message });
   }
 };
 // ---------------------
@@ -371,7 +358,6 @@ exports.addsalaryj = async (req, res) => {
     const salary = await Salary.create(req.body);
     res.status(201).json(salary);
   } catch (e) {
-    res.status(500).json({error: e.message});
   }
 };
 
@@ -383,7 +369,6 @@ exports.getsalariesj = async (req, res) => {
     const salaries = await Salary.find().lean();
     res.json(salaries);
   } catch (e) {
-    res.status(500).json({ error: e.message });
   }
 };
 
@@ -406,7 +391,6 @@ exports.getsalarybyemailj = async (req, res) => {
 
     res.json(salary);
   } catch (e) {
-    res.status(500).json({ error: e.message });
   }
 };
 // ---------------------
@@ -433,7 +417,6 @@ exports.updatesalaryj = async (req, res) => {
 
     res.json(salary);
   } catch (e) {
-    res.status(500).json({ error: e.message });
   }
 };
 
@@ -449,7 +432,6 @@ exports.deletesalaryj = async (req, res) => {
     }
     res.json({ message: "Salary deleted", salary });
   } catch (e) {
-    res.status(500).json({ error: e.message });
   }
 };
 
@@ -464,7 +446,6 @@ exports.adddeductionj = async (req, res) => {
     const deduction = await Deduction.create(req.body);
     res.status(201).json(deduction);
   } catch (e) {
-    res.status(500).json({error: e.message});
   }
 };
 // Get all deductions
@@ -473,7 +454,6 @@ exports.getalldeductionsj = async (req, res) => {
     const deductions = await Deduction.find().lean();
     res.json(deductions);
   } catch (e) {
-    res.status(500).json({ error: e.message });
   }
 };
 //get deduction by email
@@ -493,7 +473,6 @@ exports.getdeductionbyemailj = async (req, res) => {
 
     res.json({ deductions });
   } catch (e) {
-    res.status(500).json({ error: e.message });
   }
 };
 
@@ -507,7 +486,6 @@ exports.updatedeductionj = async (req, res) => {
     }
     res.json(deduction);
   } catch (e) {
-    res.status(500).json({ error: e.message });
   }
 };
 // Delete a deduction
@@ -520,7 +498,6 @@ exports.deletedeductionj = async (req, res) => {
     }
     res.json({ message: "Deduction deleted", deduction });
   } catch (e) {
-    res.status(500).json({ error: e.message });
   }
 };
 
@@ -623,9 +600,5 @@ exports.calculatesalaryandslipj = async (req, res) => {
     });
 
   } catch (error) {
-    res.status(500).json({
-      message: "Salary calculation failed",
-      error: error.message
-    });
   }
 };
