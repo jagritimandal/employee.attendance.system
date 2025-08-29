@@ -214,7 +214,7 @@ exports.checkinj = async (req, res) => {
 exports.getipj = async (req, res) => {
   try {
     let ip =
-    req.headers["x-forwarded-for"]?.split(",")[0] ||
+    req.headers["x-forwarded-for"]?.split(",")[0]?.trim() ||
     req.socket?.remoteAddress ||
     "Unknown";
   
@@ -224,8 +224,11 @@ exports.getipj = async (req, res) => {
   // Clean "::ffff:" prefix (IPv4 mapped IPv6)
   ip = ip.replace(/^::ffff:/, "");
 
+  // Remove port if present (Azure case: 106.196.6.38:49838)
+  if (ip.includes(":") && !ip.startsWith("::")) {
+    ip = ip.split(":")[0];
+  }
   //console.log("Client IP:", ip);
-  console.log(req.ip);
   
 res.json({ ip });
   } catch (error) {
